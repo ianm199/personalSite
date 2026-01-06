@@ -1,16 +1,59 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
 
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Ian McLaughlin">
+  <section class="intro">
+    <h1>Ian McLaughlin</h1>
+    <p class="tagline">Your tagline here.</p>
+  </section>
+
+  <section class="recent-posts">
+    <h2>Recent Posts</h2>
+    {posts.length > 0 ? (
+      posts.map((post) => (
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          pubDate={post.data.pubDate}
+          slug={post.slug}
+          tags={post.data.tags}
+        />
+      ))
+    ) : (
+      <p>No posts yet.</p>
+    )}
+    <a href="/blog" class="view-all">View all posts →</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .intro h1 {
+    margin-bottom: var(--space-sm);
+  }
+
+  .tagline {
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .recent-posts h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  .view-all {
+    display: inline-block;
+    margin-top: var(--space-md);
+  }
+</style>

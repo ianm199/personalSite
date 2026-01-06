@@ -1,0 +1,64 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/about', label: 'About' },
+];
+---
+
+<header class="site-header">
+  <div class="header-content">
+    <a href="/" class="site-title">Ian McLaughlin</a>
+    <nav>
+      {navItems.map(({ href, label }) => (
+        <a href={href}>{label}</a>
+      ))}
+    </nav>
+    <ThemeToggle />
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .header-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .site-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-text);
+  }
+
+  .site-title:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  nav {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  nav a {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+  }
+
+  nav a:hover {
+    color: var(--color-accent);
+  }
+</style>
