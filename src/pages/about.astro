@@ -1,8 +1,146 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const experience = [
+  {
+    company: 'Prizeout',
+    role: 'Software Engineer',
+    period: 'Dec 2023 - Present',
+  },
+  {
+    company: 'Coin Metrics',
+    role: 'Software Engineer',
+    period: 'Jul 2022 - Dec 2023',
+  },
+  {
+    company: 'Poloniex',
+    role: 'Site Reliability Engineer',
+    period: 'Jan 2021 - May 2022',
+  },
+  {
+    company: 'Liberty Mutual Insurance',
+    role: 'Software Engineer Intern',
+    period: 'Jan 2020 - Jul 2020',
+  },
+  {
+    company: 'Invesco Quantitative Strategies',
+    role: 'Portfolio Management Associate',
+    period: 'Jan 2019 - Jul 2019',
+  },
+];
 ---
 
 <BaseLayout title="About - Ian McLaughlin" description="About Ian McLaughlin">
-  <h1>About</h1>
-  <p>Write your bio here.</p>
+  <div class="about-page">
+    <h1>About</h1>
+
+    <section class="section">
+      <h2>experience</h2>
+      <div class="experience-list">
+        {experience.map((job) => (
+          <div class="job">
+            <div class="job-header">
+              <span class="job-company">{job.company}</span>
+              <span class="job-period">{job.period}</span>
+            </div>
+            <div class="job-role">{job.role}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>connect</h2>
+      <div class="connect-links">
+        <a href="mailto:your@email.com">email</a>
+        <span class="sep">/</span>
+        <a href="https://github.com/ianm199" target="_blank" rel="noopener noreferrer">github</a>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
+
+<style>
+  .about-page {
+    padding: var(--space-xl) 0;
+  }
+
+  .about-page h1 {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .section {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .section h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .job {
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .job:last-child {
+    border-bottom: none;
+  }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xs);
+  }
+
+  .job-company {
+    color: var(--text-primary);
+  }
+
+  .job-period {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .job-role {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .connect-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .connect-links a {
+    color: var(--text-muted);
+    border: none;
+    transition: color 0.15s;
+  }
+
+  .connect-links a:hover {
+    color: var(--text-secondary);
+  }
+
+  .sep {
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 480px) {
+    .job-header {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .job-period {
+      order: -1;
+    }
+  }
+</style>

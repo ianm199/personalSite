@@ -5,18 +5,19 @@ const currentYear = new Date().getFullYear();
 <footer class="site-footer">
   <div class="footer-content">
     <div class="footer-links">
-      <a href="/rss.xml">RSS</a>
-      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer">github</a>
+      <span class="sep">/</span>
+      <a href="/rss.xml">rss</a>
     </div>
-    <p class="copyright">&copy; {currentYear} Ian McLaughlin</p>
+    <p class="copyright">© {currentYear}</p>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    border-top: 1px solid var(--color-border);
-    padding: var(--space-lg);
     margin-top: auto;
+    padding: var(--space-xl) var(--space-lg);
+    border-top: 1px solid var(--border);
   }
 
   .footer-content {
@@ -25,26 +26,32 @@ const currentYear = new Date().getFullYear();
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: var(--space-md);
   }
 
   .footer-links {
     display: flex;
-    gap: var(--space-md);
+    align-items: center;
+    gap: var(--space-sm);
   }
 
   .footer-links a {
-    color: var(--color-text-secondary);
-    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border: none;
+    transition: color 0.15s;
   }
 
   .footer-links a:hover {
-    color: var(--color-accent);
+    color: var(--text-secondary);
+  }
+
+  .sep {
+    color: var(--text-muted);
+    font-size: 0.85rem;
   }
 
   .copyright {
-    color: var(--color-text-secondary);
+    color: var(--text-muted);
     font-size: 0.85rem;
     margin: 0;
   }

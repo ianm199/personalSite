@@ -1,30 +1,37 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/about', label: 'About' },
+  { href: `${base}blog`, label: 'writing' },
+  { href: `${base}projects`, label: 'projects' },
+  { href: `${base}about`, label: 'about' },
 ];
+
+const currentPath = Astro.url.pathname;
 ---
 
 <header class="site-header">
   <div class="header-content">
-    <a href="/" class="site-title">Ian McLaughlin</a>
+    <a href={base} class="site-logo">ian mclaughlin</a>
     <nav>
-      {navItems.map(({ href, label }) => (
-        <a href={href}>{label}</a>
-      ))}
+      {navItems.map(({ href, label }) => {
+        const isActive = currentPath === href || (href !== base && currentPath.startsWith(href));
+        return (
+          <a href={href} class:list={['nav-link', { active: isActive }]}>
+            {label}
+          </a>
+        );
+      })}
     </nav>
-    <ThemeToggle />
   </div>
 </header>
 
 <style>
   .site-header {
-    border-bottom: 1px solid var(--color-border);
-    padding: var(--space-md) var(--space-lg);
+    padding: var(--space-lg) var(--space-lg);
+    border-bottom: 1px solid var(--border);
   }
 
   .header-content {
@@ -33,19 +40,13 @@ const navItems = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-md);
-    flex-wrap: wrap;
+    gap: var(--space-lg);
   }
 
-  .site-title {
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--color-text);
-  }
-
-  .site-title:hover {
-    color: var(--color-accent);
-    text-decoration: none;
+  .site-logo {
+    color: var(--text-primary);
+    font-weight: 500;
+    border: none;
   }
 
   nav {
@@ -53,12 +54,28 @@ const navItems = [
     gap: var(--space-md);
   }
 
-  nav a {
-    color: var(--color-text-secondary);
-    font-size: 0.95rem;
+  .nav-link {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border: none;
+    transition: color 0.15s;
   }
 
-  nav a:hover {
-    color: var(--color-accent);
+  .nav-link:hover {
+    color: var(--text-secondary);
+  }
+
+  .nav-link.active {
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 480px) {
+    nav {
+      gap: var(--space-sm);
+    }
+
+    .nav-link {
+      font-size: 0.85rem;
+    }
   }
 </style>

@@ -8,76 +8,152 @@ interface Props {
 
 const { post } = Astro.props;
 const { title, description, pubDate, updatedDate, tags } = post.data;
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric',
   });
 }
 ---
 
 <BaseLayout title={title} description={description}>
-  <article>
+  <article class="post">
     <header class="post-header">
-      <h1>{title}</h1>
       <div class="post-meta">
         <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
         {updatedDate && (
           <span class="updated">
-            (Updated: <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate)}</time>)
+            · updated {formatDate(updatedDate)}
           </span>
         )}
       </div>
+      <h1>{title}</h1>
       {tags && tags.length > 0 && (
         <div class="tags">
           {tags.map((tag) => (
-            <span class="tag">{tag}</span>
+            <span class="tag">#{tag}</span>
           ))}
         </div>
       )}
     </header>
+
     <div class="post-content">
       <slot />
     </div>
+
+    <footer class="post-footer">
+      <a href={`${base}blog`} class="back-link">← all posts</a>
+    </footer>
   </article>
 </BaseLayout>
 
 <style>
-  .post-header {
-    margin-bottom: var(--space-xl);
+  .post {
+    padding: var(--space-xl) 0;
   }
 
-  .post-header h1 {
-    margin-bottom: var(--space-sm);
+  .post-header {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border);
   }
 
   .post-meta {
-    color: var(--color-text-secondary);
-    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: var(--space-sm);
   }
 
-  .updated {
-    margin-left: var(--space-sm);
+  .post-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-sm);
   }
 
   .tags {
-    margin-top: var(--space-sm);
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
   }
 
   .tag {
-    background-color: var(--color-bg-secondary);
-    padding: 2px 8px;
-    border-radius: 4px;
+    color: var(--text-muted);
     font-size: 0.8rem;
-    color: var(--color-text-secondary);
   }
 
   .post-content {
     line-height: 1.8;
+  }
+
+  .post-content :global(h2) {
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+
+  .post-content :global(h3) {
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-md);
+  }
+
+  .post-content :global(p) {
+    margin-bottom: var(--space-md);
+  }
+
+  .post-content :global(a) {
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.15s;
+  }
+
+  .post-content :global(a:hover) {
+    border-color: var(--text-primary);
+  }
+
+  .post-content :global(blockquote) {
+    margin: var(--space-xl) 0;
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--border);
+    color: var(--text-secondary);
+  }
+
+  .post-content :global(blockquote p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .post-content :global(pre) {
+    margin: var(--space-lg) 0;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-bottom: var(--space-md);
+  }
+
+  .post-content :global(img) {
+    border-radius: 4px;
+    margin: var(--space-lg) 0;
+  }
+
+  .post-footer {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
+  }
+
+  .back-link {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border: none;
+    transition: color 0.15s;
+  }
+
+  .back-link:hover {
+    color: var(--text-secondary);
   }
 </style>

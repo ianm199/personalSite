@@ -5,9 +5,13 @@ interface Props {
   pubDate: Date;
   slug: string;
   tags?: string[];
+  index?: number;
 }
 
 const { title, description, pubDate, slug, tags } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString('en-US', {
@@ -19,53 +23,62 @@ function formatDate(date: Date): string {
 ---
 
 <article class="post-card">
-  <a href={`/blog/${slug}`}>
-    <h3>{title}</h3>
-  </a>
-  <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
-  <p>{description}</p>
-  {tags && tags.length > 0 && (
-    <div class="tags">
-      {tags.map((tag) => (
-        <span class="tag">{tag}</span>
-      ))}
-    </div>
-  )}
+  <div class="post-meta">
+    <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+  </div>
+  <div class="post-content">
+    <a href={`${base}blog/${slug}`} class="post-title">
+      <h3>{title}</h3>
+    </a>
+    <p class="post-description">{description}</p>
+    {tags && tags.length > 0 && (
+      <div class="tags">
+        {tags.map((tag) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+    )}
+  </div>
 </article>
 
 <style>
   .post-card {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: var(--space-md);
     padding: var(--space-md) 0;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--border);
   }
 
   .post-card:last-child {
     border-bottom: none;
   }
 
-  .post-card h3 {
+  .post-meta time {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  .post-title {
+    border: none;
+    display: inline;
+  }
+
+  .post-title h3 {
     margin: 0 0 var(--space-xs);
-    font-size: 1.1rem;
+    font-weight: 500;
+    display: inline;
   }
 
-  .post-card a {
-    color: var(--color-text);
+  .post-title:hover h3 {
+    color: var(--text-secondary);
   }
 
-  .post-card a:hover {
-    color: var(--color-accent);
-    text-decoration: none;
-  }
-
-  time {
-    color: var(--color-text-secondary);
-    font-size: 0.85rem;
-  }
-
-  p {
-    margin: var(--space-xs) 0 0;
-    color: var(--color-text-secondary);
-    font-size: 0.95rem;
+  .post-description {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .tags {
@@ -76,10 +89,18 @@ function formatDate(date: Date): string {
   }
 
   .tag {
-    background-color: var(--color-bg-secondary);
-    padding: 2px 6px;
-    border-radius: 4px;
+    color: var(--text-muted);
     font-size: 0.75rem;
-    color: var(--color-text-secondary);
+  }
+
+  .tag::before {
+    content: '#';
+  }
+
+  @media (max-width: 480px) {
+    .post-card {
+      grid-template-columns: 1fr;
+      gap: var(--space-xs);
+    }
   }
 </style>
