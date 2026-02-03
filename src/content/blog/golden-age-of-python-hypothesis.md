@@ -1,7 +1,7 @@
 ---
-title: "AI agents are unlocking a new class of software tools that require a custom integration per project or framework"
-description: "Using static analysis to find production bugs open source projects like httpbin, Redash, Airflow, and Label Studio"
-pubDate: 2026-02-02
+title: "Tracing Python Exceptions with static analysis to find production bugs open source projects like httpbin, Redash, Airflow, and Label Studio"
+description: "AI agents are unlocking a new class of software tools that require a custom integration per project or framework"
+pubDate: 2026-02-03
 tags: ["python", "static-analysis", "tooling"]
 draft: false
 ---
