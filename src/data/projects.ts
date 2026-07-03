@@ -42,18 +42,11 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    repo: 'bms-lua-rs',
-    title: 'bms-lua-rs',
+    repo: 'blirbBackendPublic',
+    title: 'blirb backend',
     blurb:
-      'Lua scripting inside a Bevy wasm build with no C dependency — runs Game of Life in-browser through a live editor, on top of lua-rs.',
-    language: 'Rust',
-    featured: false,
-  },
-  {
-    repo: 'darkhttpd-rs',
-    title: 'darkhttpd-rs',
-    blurb: 'An evidence-driven Rust port of the darkhttpd web server.',
-    language: 'Rust',
+      'The Django REST backend for blirb.io, a social app for recommending movies, shows, books, and podcasts to your friend groups — built with my brother and a friend, integrating TMDB, Spotify, and the Google Books API.',
+    language: 'Python',
     featured: false,
   },
   {
