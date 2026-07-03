@@ -34,6 +34,14 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    repo: 'bubble-analysis',
+    title: 'bubble',
+    blurb:
+      'A static analysis tool that traces uncaught exceptions across Python web frameworks, surfacing real bugs in projects like httpbin, Redash, Airflow, and Label Studio.',
+    language: 'Python',
+    featured: true,
+  },
+  {
     repo: 'bms-lua-rs',
     title: 'bms-lua-rs',
     blurb:

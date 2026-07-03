@@ -10,7 +10,7 @@ draft: false
 
 In a [previous post](/personalSite/blog/golden-age-of-python-hypothesis) I built [Bubble](https://github.com/ianm199/bubble-analysis), a static analysis tool that traces uncaught exceptions across Python web frameworks. The argument was that AI agents make a new class of developer tool possible - tools that need custom integration per framework or per repository, where the economics of that integration work used to be prohibitive.
 
-[Crosslink](https://github.com/ianm199/crosslink) is the same idea applied to a harder problem: mapping inter-service dependencies across an entire microservice architecture, across languages, using static analysis and tree-sitter. I built it in a single Claude Code session using the `/bootstrap` command. I came across this problem at work while I was trying to work across multiple microservices (distributed monolith really) and saw how much worse AI agent performance was on them. I'd always thought it would be nice to tie these together in IDEs as well.
+[Crosslink](https://github.com/ianm199/crosslink-attempt-1) is the same idea applied to a harder problem: mapping inter-service dependencies across an entire microservice architecture, across languages, using static analysis and tree-sitter. I built it in a single Claude Code session using the `/bootstrap` command. I came across this problem at work while I was trying to work across multiple microservices (distributed monolith really) and saw how much worse AI agent performance was on them. I'd always thought it would be nice to tie these together in IDEs as well.
 
 ## What Crosslink does
 
