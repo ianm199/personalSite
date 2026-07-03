@@ -2,10 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
 import { getCollection } from 'astro:content';
+import { projects, githubUser } from '../data/projects';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 5);
+
+const featured = projects.filter((project) => project.featured);
 
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
@@ -21,6 +24,24 @@ const base = import.meta.env.BASE_URL.endsWith('/')
       <span class="sep">·</span>
       <a href="https://github.com/ianm199" target="_blank" rel="noopener noreferrer">github</a>
     </div>
+  </section>
+
+  <section class="work">
+    <h2>selected work</h2>
+    <div class="work-list">
+      {featured.map((project) => (
+        <a
+          href={`https://github.com/${githubUser}/${project.repo}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="work-item"
+        >
+          <span class="work-title">{project.title}</span>
+          <span class="work-blurb">{project.blurb}</span>
+        </a>
+      ))}
+    </div>
+    <a href={`${base}projects`} class="all-link">all projects →</a>
   </section>
 
   <section class="posts">
@@ -79,6 +100,46 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 
   .sep {
     color: var(--text-muted);
+  }
+
+  .work {
+    padding: var(--space-xl) 0 0;
+  }
+
+  .work h2 {
+    margin-bottom: var(--space-lg);
+  }
+
+  .work-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .work-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-md) 0;
+    border: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .work-item:last-child {
+    border-bottom: none;
+  }
+
+  .work-title {
+    color: var(--text-primary);
+  }
+
+  .work-item:hover .work-title {
+    color: var(--text-secondary);
+  }
+
+  .work-blurb {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .posts {

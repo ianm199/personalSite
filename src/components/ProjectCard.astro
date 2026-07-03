@@ -1,0 +1,87 @@
+---
+interface Props {
+  title: string;
+  blurb: string;
+  language: string;
+  stars: number;
+  url: string;
+}
+
+const { title, blurb, language, stars, url } = Astro.props;
+---
+
+<article class="project-card">
+  <div class="project-meta">
+    <span class="lang">{language}</span>
+  </div>
+  <div class="project-content">
+    <a href={url} target="_blank" rel="noopener noreferrer" class="project-title">
+      <h3>{title}</h3>
+    </a>
+    <p class="project-blurb">{blurb}</p>
+    {stars > 0 && (
+      <div class="project-stats">
+        <span class="stars">★ {stars}</span>
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .project-card {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project-card:last-child {
+    border-bottom: none;
+  }
+
+  .project-meta .lang {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  .project-title {
+    border: none;
+    display: inline;
+  }
+
+  .project-title h3 {
+    margin: 0 0 var(--space-xs);
+    font-weight: 500;
+    display: inline;
+  }
+
+  .project-title:hover h3 {
+    color: var(--text-secondary);
+  }
+
+  .project-blurb {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .project-stats {
+    margin-top: var(--space-sm);
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .stars {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    .project-card {
+      grid-template-columns: 1fr;
+      gap: var(--space-xs);
+    }
+  }
+</style>
