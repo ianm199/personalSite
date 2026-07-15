@@ -75,7 +75,8 @@ I realized that personally and professionally using best practices is more impor
 * I had Claude do an audit of how we were using Datadog - cleared out tons of stale alerts, fixed bugs in our core dashboard, and started tracking metrics in a way that was actually useful to the business
 * I synced all my calendars to one, including external event services like Partiful, so that I can get personalized reminders on events I have coming up.
   * For example I have a potluck coming up, so I will get some alerts from my agent to actually cook some food for that before it
-  * I have an OpenClaw agent that runs at the beginning of the day and tells me if I have anything to do before these meetings
+  * I have an OpenClaw type agent that runs at the beginning of the day and tells me if I have anything to do before these meetings
+* I finally moved all my emails to one, so I can easily interface with one email account with my agent
 
 ## AI or not, these were all best practices to begin with
 Software logs are supposed to be squeaky clean, your work and life should be organized, you should use industry best practices like observability etc. The difference is that now these are the difference between AI being moderately useful and incredibly helpful in organizing your life and work.
