@@ -16,9 +16,15 @@ npm run build
 npm run preview
 ```
 
-## Adding a blog post
+## Writing blog posts
 
-Create a file in `src/content/blog/`:
+Run `npm run dev` and open the in-browser editor at
+`http://localhost:4321/personalSite/__edit` — split-pane Markdown editing with a live
+preview of the real rendered post, autosave to the `.md` files, and a publish button
+that commits the post and pushes to `main`. Dev-only; see [editor/README.md](editor/README.md)
+for features, shortcuts, and architecture.
+
+Posts can also be edited as plain files in `src/content/blog/`:
 
 ```md
 ---
@@ -32,7 +38,7 @@ draft: false
 Your content here.
 ```
 
-Set `draft: true` to hide from production builds.
+Set `draft: true` to hide from production builds (drafts still render in dev).
 
 ## Deployment
 

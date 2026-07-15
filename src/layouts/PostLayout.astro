@@ -32,6 +32,9 @@ function formatDate(date: Date): string {
             · updated {formatDate(updatedDate)}
           </span>
         )}
+        {import.meta.env.DEV && (
+          <a href={`${base}__edit?slug=${post.slug}`} class="edit-link">edit</a>
+        )}
       </div>
       <h1>{title}</h1>
       {tags && tags.length > 0 && (
@@ -68,6 +71,12 @@ function formatDate(date: Date): string {
     color: var(--text-muted);
     font-size: 0.85rem;
     margin-bottom: var(--space-sm);
+  }
+
+  .edit-link {
+    margin-left: var(--space-sm);
+    color: var(--text-muted);
+    text-decoration: underline;
   }
 
   .post-header h1 {
