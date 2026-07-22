@@ -1,5 +1,5 @@
 ---
-title: "Inadvertently becoming a slop contributor to rust core library"
+title: "Inadvertently becoming a slop contributor to a rust core library"
 description: ""
 pubDate: 2026-07-22
 tags: []
